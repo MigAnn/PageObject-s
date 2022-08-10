@@ -15,14 +15,10 @@ public class TransferMoneyPage {
     private SelenideElement error = $("[data-test-id=error-notification]");
 
 
-    public DashboardPage shouldMoneyInfo(DataHelper.MoneyTransfer moneyTransfer) {
-        amountForTransfer.setValue(String.valueOf(moneyTransfer.getAmount()));
+    public DashboardPage shouldMoneyInfo(DataHelper.MoneyTransfer moneyTransfer, int amount) {
+        amountForTransfer.setValue(String.valueOf(amount));
         cardNumberSelector.setValue(moneyTransfer.getCardNumber());
         buttonTransfer.click();
         return new DashboardPage();
-    }
-    public void checkBalance(DataHelper.MoneyTransfer moneyTransfer) {
-        shouldMoneyInfo(moneyTransfer);
-        error.shouldHave(exactText("На карте № " + moneyTransfer.getCardNumber() + " недостаточно средств")).shouldBe(visible);
     }
 }
