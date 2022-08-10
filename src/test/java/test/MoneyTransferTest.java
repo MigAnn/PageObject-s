@@ -70,13 +70,19 @@ public class MoneyTransferTest {
     void shouldTransferNegativeBalance() {
 
         int amount = 15000;
-        var cardInfo = DataHelper.getFirstCardNumber();
+        var cardInfoFirst = DataHelper.getFirstCardNumber();
+        var cardInfoSecond = DataHelper.getSecondCardNumber();
 
         var dashboard = new DashboardPage();
-        dashboard.changeCard(1).shouldMoneyInfo(cardInfo,amount);
+        dashboard.changeCard(1).shouldMoneyInfo(cardInfoFirst,amount);
         int finalBalanceFirstCard=dashboard.getCardBalance("0");
         int finalBalanceSecondCard=dashboard.getCardBalance("1");
 
-        assertTrue(finalBalanceFirstCard>0 && finalBalanceSecondCard>0);
+        var transfer=new TransferMoneyPage();
+        if(finalBalanceFirstCard<0){
+            transfer.noNegativeBalance(cardInfoFirst);
+        } else if (finalBalanceSecondCard<0) {
+            transfer.noNegativeBalance(cardInfoSecond);
+        }
     }
 }

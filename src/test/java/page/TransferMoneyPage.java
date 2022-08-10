@@ -21,4 +21,7 @@ public class TransferMoneyPage {
         buttonTransfer.click();
         return new DashboardPage();
     }
+    public void noNegativeBalance(DataHelper.MoneyTransfer moneyTransfer) {
+        error.shouldHave(exactText("На карте № " + moneyTransfer.getCardNumber() + " недостаточно средств")).shouldBe(visible);
+    }
 }
