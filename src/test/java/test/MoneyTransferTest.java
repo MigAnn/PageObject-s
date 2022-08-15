@@ -77,7 +77,11 @@ public class MoneyTransferTest {
         dashboard.changeCard(1).noNegativeBalance(cardInfoFirst);
         int finalBalanceFirstCard = dashboard.getCardBalance("0");
         int finalBalanceSecondCard = dashboard.getCardBalance("1");
+
         assertTrue(finalBalanceFirstCard > 0 && finalBalanceSecondCard > 0);
+
+        assertEquals(finalBalanceFirstCard, finalBalanceFirstCard + amount);
+        assertEquals(finalBalanceSecondCard, finalBalanceSecondCard - amount);
 
     }
 }
